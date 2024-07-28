@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8080
 
 spring:
   application:
@@ -13,9 +13,9 @@ spring:
       path: /h2-console
 
   datasource:
-    url: jdbc:mysql://commercebank.c986wiuwap7e.us-east-1.rds.amazonaws.com:3306/commercebankprojectdb
-    username: admin
-    password: MAR123456
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
