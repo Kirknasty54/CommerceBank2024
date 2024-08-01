@@ -16,29 +16,30 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ServerInfo {
-    @Id
-    private Long sid;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "appInfoId", nullable = false)
-    @JsonIgnore
-    private AppInfo appInfo;
+  @Id
+  private Long sid;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "appInfoId", nullable = false)
+  @JsonIgnore
+  private AppInfo appInfo;
 
-    @Transient
-    public Long getAppInfoId(){
-        return appInfo != null ? appInfo.getAppInfoId() : null;
-    }
-    @Column(name = "app_desc")
-    private String appDesc;
-    private String sourceHostname;
-    @Getter
-    private String sourceIpAddress;
-    private String destinationHostName;
-    private String destinationIpAddress;
-    private String destinationPort;
-    private Boolean ipStatus;
-    private Timestamp createdAt;
-    private String createBy;
-    private Timestamp modifiedAt;
-    private String modifiedBy;
+  @Transient
+  public Long getAppInfoId() {
+    return appInfo != null ? appInfo.getAppInfoId() : null;
+  }
+
+  @Column(name = "app_desc")
+  private String appDesc;
+  private String sourceHostname;
+  @Getter
+  private String sourceIpAddress;
+  private String destinationHostName;
+  private String destinationIpAddress;
+  private String destinationPort;
+  private Boolean ipStatus;
+  private Timestamp createdAt;
+  private String createBy;
+  private Timestamp modifiedAt;
+  private String modifiedBy;
 
 }

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -15,27 +14,32 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@IdClass(UserInfoId.class)
 public class UserInfo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long uId;
-    @Column(unique = true)
-    private String userName;
-    private String password;
-    private String role;
-    private Timestamp createdAt;
-    private String createdBy;
-    private Timestamp modifiedAt;
-    private String modifiedBy;
+  @Id
+  // @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long uId;
 
-    @OneToMany(mappedBy = "userInfo")
-    @Setter
-    @JsonIgnore
-    private List<UserApps> userApps = new ArrayList<>();
+  @Id
+  @Column(unique = true)
+  private String userName;
 
-    public void addUserApps(UserApps appToAdd){
-        userApps.add(appToAdd);
-    }
-    
+  private String password;
+  private String role;
+  private Timestamp createdAt;
+  private Timestamp modifiedAt;
+  private Timestamp lastLogin;
+  private Timestamp lastFailedLogin;
+  private int consFailedLoginAttempts;
+  private String createdBy;
+  private String modifiedBy;
+
+  @OneToMany(mappedBy = "userInfo")
+  @JsonIgnore
+  private List<UserApps> userApps = new ArrayList<>();
+
+  public void addUserApps(UserApps appToAdd) {
+    userApps.add(appToAdd);
+  }
 }

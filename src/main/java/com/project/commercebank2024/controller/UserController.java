@@ -122,13 +122,10 @@ public class UserController {
   // clicking register button, and sees if that username already exists
   @PostMapping(value = "/check", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> register(@RequestBody Map<String, String> username) {
-    // Optional<UserInfo> possibleUser =
-    // userService.check(username.get("username"));
     Optional<UserInfo> possibleUser = userService.check(username.get("username"));
     AlreadyExistsResponse response;
     if (possibleUser.isPresent()) {
       response = new AlreadyExistsResponse(true);
-      System.out.println(response);
       return new ResponseEntity<>(response, HttpStatus.OK);
     } else {
       response = new AlreadyExistsResponse(false);
