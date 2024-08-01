@@ -17,10 +17,7 @@ public class UserApps {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long userAppsUid;
   @ManyToOne
-  @JoinColumns({
-      @JoinColumn(name = "uId", referencedColumnName = "uId"),
-      @JoinColumn(name = "userName", referencedColumnName = "userName")
-  })
+  @JoinColumn(name = "uId", referencedColumnName = "uId")
   @JsonIgnore
   private UserInfo userInfo;
   @ManyToOne

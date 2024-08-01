@@ -14,14 +14,12 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@IdClass(UserInfoId.class)
 public class UserInfo {
 
   @Id
   // @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long uId;
 
-  @Id
   @Column(unique = true)
   private String userName;
 
