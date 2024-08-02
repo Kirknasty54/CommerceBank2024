@@ -32,6 +32,7 @@ public class UserInfo {
   private int consFailedLoginAttempts;
   private String createdBy;
   private String modifiedBy;
+  private String userEmail;
 
   @OneToMany(mappedBy = "userInfo")
   @JsonIgnore

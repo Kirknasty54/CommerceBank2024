@@ -1,4 +1,5 @@
 package com.project.commercebank2024.controller;
+//package com.project.commercebank2024.emailapp;
 
 import com.project.commercebank2024.domain.AppInfo;
 import com.project.commercebank2024.domain.ServerInfo;
@@ -129,6 +130,20 @@ public class UserController {
       return new ResponseEntity<>(response, HttpStatus.OK);
     } else {
       response = new AlreadyExistsResponse(false);
+      return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+  }
+
+  @PostMapping(value = "/registerSendRequest", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> registerRequest(@RequestBody Map<String, String> info) {
+    Optional<UserInfo> possibleUser = userService.check(info.get("username"));
+    AlreadyExistsResponse response;
+    if (possibleUser.isPresent()) {
+      response = new AlreadyExistsResponse(true);
+      return new ResponseEntity<>(response, HttpStatus.OK);
+    } else {
+      response = new AlreadyExistsResponse(false);
+
       return new ResponseEntity<>(response, HttpStatus.OK);
     }
   }
