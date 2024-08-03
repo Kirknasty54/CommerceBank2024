@@ -25,10 +25,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'mysql:mysql-connector-java:8.0.33'
-	compileOnly 'org.projectlombok:lombok'
+	implementation 'org.projectlombok:lombok'
   implementation('org.springframework.boot:spring-boot-starter-mail')
+  compileOnly 'org.springframework:spring-context-support'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
+	runtimeOnly 'org.apache.activemq:artemis-jakarta-server'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

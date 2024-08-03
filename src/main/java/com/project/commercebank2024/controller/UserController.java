@@ -1,7 +1,7 @@
 package com.project.commercebank2024.controller;
-//package com.project.commercebank2024.emailapp;
 
 import com.project.commercebank2024.domain.AppInfo;
+import com.project.commercebank2024.service.EmailService;
 import com.project.commercebank2024.domain.ServerInfo;
 import com.project.commercebank2024.domain.UserApps;
 import com.project.commercebank2024.domain.UserInfo;
@@ -22,6 +22,7 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
+import org.springframework.mail.javamail.JavaMailSender;
 
 @RestController
 @AllArgsConstructor
@@ -37,6 +38,8 @@ public class UserController {
   private AppInfoRepository appInfoRepository;
   @Autowired
   private UserAppsRepository userAppsRepository;
+  @Autowired
+  private EmailService emailService;
 
   @GetMapping
   // this returns all users and the applications they have access to
@@ -122,8 +125,8 @@ public class UserController {
   // this register fucntion checks what the user entered as a username upon
   // clicking register button, and sees if that username already exists
   @PostMapping(value = "/check", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> register(@RequestBody Map<String, String> username) {
-    Optional<UserInfo> possibleUser = userService.check(username.get("username"));
+  public ResponseEntity<?> register(@RequestBody Map<String, String> info) {
+    Optional<UserInfo> possibleUser = userService.check(info.get("username"));
     AlreadyExistsResponse response;
     if (possibleUser.isPresent()) {
       response = new AlreadyExistsResponse(true);
@@ -143,7 +146,10 @@ public class UserController {
       return new ResponseEntity<>(response, HttpStatus.OK);
     } else {
       response = new AlreadyExistsResponse(false);
-
+      String adminEmail = System.getenv("kirkpatrick545454@gmail.com");
+      String subject = "New User Registration Request";
+      String body = "A new user with username: " + info.get("username") + " has requested to register";
+      emailService.sendEmail(adminEmail, subject, body);
       return new ResponseEntity<>(response, HttpStatus.OK);
     }
   }
