@@ -146,7 +146,7 @@ public class UserController {
       return new ResponseEntity<>(response, HttpStatus.OK);
     } else {
       response = new AlreadyExistsResponse(false);
-      String adminEmail = System.getenv("kirkpatrick545454@gmail.com");
+      String adminEmail = "kirkpatrick545454@gmail.com";
       String subject = "New User Registration Request";
       String body = "A new user with username: " + info.get("username") + " has requested to register";
       emailService.sendEmail(adminEmail, subject, body);

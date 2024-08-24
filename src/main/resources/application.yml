@@ -3,18 +3,20 @@ server:
 
 spring:
   mail:
-    host: smtp.gamil.com
-    port: 587
-    username: ${COMMERCEBANK_TEST }
-    password: ${COMMERCEBANK_APP_PASWORD }
+    #host: smtp.gmail.com
+    #port: 587
+    #username: ${env.COMMERCEBANK_TEST }
+    #password: ${$env.COMMERCEBANK_APP_PASWORD}
     properties:
-      smtp:
-        auth: true
-        starttls:
-         enable: true
-      "[mail.smtp.connectiontimeout]": 5000
-      "[mail.smtp.timeout]": 3000
-      "[mail.smtp.writetimeout]": 5000
+      mail:
+        debug: true
+    #smtp:
+      #auth: true
+      #starttls:
+       #  enable: true
+      # connectiontimeout: 5000
+      #  timeout: 3000
+      #  writetimeout: 5000
       
   application:
     name: book-service
