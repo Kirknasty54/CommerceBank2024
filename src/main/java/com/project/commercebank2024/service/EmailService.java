@@ -1,34 +1,32 @@
 package com.project.commercebank2024.service;
 
-import java.util.Properties;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import com.project.commercebank2024.domain.EmailInfo;
+import com.project.commercebank2024.repository.EmailInfoRepository;
+
+import lombok.AllArgsConstructor;
+
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class EmailService {
 
-  // @Bean
-  // public JavaMailSender getJavaMailSender() {
-  // JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-  // mailSender.setHost("smtp.gmail.com");
-  // mailSender.setPort(587);
-  //
-  // mailSender.setUsername(System.getenv("COMMERCEBANK_TEST"));
-  // mailSender.setPassword(System.getenv("COMMERCEBANK_APP_PASWORD"));
-  //
-  // Properties props = mailSender.getJavaMailProperties();
-  // props.put("mail.transport.protocol", "smtp");
-  // props.put("mail.smtp.auth", "true");
-  // props.put("mail.smtp.starttls.enable", "true");
-  // props.put("mail.debug", "true");
-  //
-  // return mailSender;
-  // }
+  @Autowired
+  private final EmailInfoRepository emailInfoRepository;
+
+  public Optional<EmailInfo> findByuserNameRequestedToRegister(String userNameRequestedToRegister) {
+    return emailInfoRepository.findByuserNameRequestedToRegister(userNameRequestedToRegister);
+
+    // return
+    // emailInfoRepository.findByuserNameRequestedToRegister(userNameRequestedToRegister);
+  }
+
   @Autowired
   private JavaMailSender emailSender;
 
